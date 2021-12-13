@@ -1,0 +1,26 @@
+.sidebar {
+    height: 100%;
+    /* background-color: #000; */
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.fondo-novedades {
+    background-color: #cd0d21;
+}
+
+.toast {
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+}

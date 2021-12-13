@@ -1,0 +1,59 @@
+<div class="row vh-100  ">
+    <div class="col-md-7 col-sm-12  d-flex border-end fondo-novedades shadow">
+
+        <div class="col align-self-center text-white">
+
+            <h1 class="text-center">Queremos saber de ti</h1>
+            <p class="text-center">Ponte en contacto, estamos listos para escuchar las necesidades de tu compañía y ayudarte.</p>
+            <ul class="ml-4">
+                <li>Oficina Los Andes: Papudo #484, Los Andes. <a class="text-white text-decoration-underline" href="tel:+56342425400">+56 34 242 5400</a></li>
+                <li>Oficina Rancagua: Bello Horizonte #781, Torre C. Of 202. Rancagua. <a class="text-white text-decoration-underline" href="tel:+56722608257">+5672
+                        2608257</a><br><br><br></li>
+            </ul>
+            <p class="text-center">
+                <a [routerLink]="['/validador']" class="btn btn-outline-light ">Valida tu informe</a>
+            </p>
+            <p class="text-center">
+                <a href="https://portal.mgcertifica.cl/Manual.pdf" class="btn btn-block btn-light " target="_blank">¿Primera
+                    Vez?
+                    Descarga nuestro manual aquí.</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-5 col-sm-12  d-flex ">
+        <div class=" col-8  offset-2  align-self-center ">
+            <form class="w-100" (ngSubmit)="iniciarSesion()" *ngIf="!respuesta.status">
+                <div class="form-group mb-3">
+                    <label>Run Usuario</label>
+                    <input #run type="text" required [ngModelOptions]="{standalone: true}" (ngModelChange)="run.value=onChangeRun($event)" [(ngModel)]="loginPortal.rutUsuario" type="text" autocomplete="off" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Rut Empresa</label>
+                    <input #rut type="text" required [ngModelOptions]="{standalone: true}" (ngModelChange)="rut.value=onChangeRut($event)" [(ngModel)]="loginPortal.rutCliente" type="text" autocomplete="off" class="form-control">
+                </div>
+                <div class="mt-3 mb">
+                    <button type="reset" class="btn  btn-outline-dark rounded-pill mx-1">Limpiar</button>
+                    <button type="submit" class="btn btn-outline-danger rounded-pill float-end">Ingresar</button>
+                </div>
+            </form>
+            <app-autoriza [loginPortal]="loginPortal" [respuesta]="respuesta" *ngIf="respuesta.status" class=" align-self-center w-100"></app-autoriza>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="Toast" class="toast hide fade" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Login</strong>
+            <small>hace cuanto ocurre?</small>
+            <button type="button" (click)="cerrarToast()" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ respuesta.data.message}}
+        </div>
+    </div>
+</div> -->

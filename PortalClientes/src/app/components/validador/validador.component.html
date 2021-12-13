@@ -1,0 +1,102 @@
+<div class="row">
+    <h4 class="text-center mt-3">Validación de informe</h4>
+    <p class="text-justify">Para la validacion de un certificado de evaluacion de competencias laborales es necesario contar con el folio del informe. Este es un numero de 9 cifras más el digito verificador y está ubicado en el pie de página.
+    </p>
+    <p class="text-justify">
+        Recuerde que para buscar se utiliza el folio del informe SIN DIGITO VERIFICADOR
+    </p>
+    <div class="col-8 offset-2">
+
+        <div class="input-group">
+            <input class="form-control" type="number" [(ngModel)]="folio" />
+
+            <button class="btn btn-danger" (click)="onClickValidar()" type="button">Validar</button>
+        </div>
+    </div>
+
+    <!-- <button type="button" class="btn btn-secondary" placement="top" ngbTooltip="Tooltip on right">
+    Tooltip on top
+</button> -->
+    <!-- Button trigger modal -->
+    <div #dvResultado class="col-12 d-none">
+        <div class="card mt-5" *ngIf="estado; else elseBlock">
+            <div class="card-header">Resultado</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div #alertResultado class="alert text-light" [ngClass]="{'bg-success': proceso.idResultado==1,'bg-danger':proceso.idResultado != 1}" role="alert">
+                            <h3 class="text-center">{{proceso.descResultado | uppercase}} </h3>
+                            <h3 class="text-center">Certificado {{proceso.vigencia | uppercase}}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-2">
+                        <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                            <p class="font-weight-bold mb-1">Nombre</p>
+                            <span>{{proceso.nombreCandidato}}</span>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-12 mb-2">
+                        <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                            <p class="font-weight-bold mb-1">Rut</p>
+                            <span>{{proceso.runCandidato | run}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 mb-2">
+                        <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                            <p class="font-weight-bold mb-1">Perfil</p>
+                            <span>{{proceso.perfil}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 mb-2">
+                        <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                            <p class="font-weight-bold mb-1">Equipo</p>
+                            <span>{{proceso.modelo}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                            <p class="font-weight-bold mb-1">Empresa</p>
+                            <span>{{proceso.nombreCliente}}</span>
+                        </div>
+                    </div>
+                </div>
+                <dl class="row mt-2">
+                    <dt class="col-lg-3 col-6"><span> % PCT</span></dt>
+                    <dd class="col-lg-3 col-6">
+                        <h5> <span class="badge bg-plomo">{{proceso.porcPct }}%</span></h5>
+                    </dd>
+                    <dt class="col-lg-3 col-6"><span> Fecha PCT</span></dt>
+                    <dd class="col-lg-3 col-6">
+                        <h5><span class="badge bg-plomo">{{proceso.fechaPct | date:"dd/MM/yyyy"}}</span></h5>
+                    </dd>
+                    <dt class="col-lg-3 col-6">% PROT</dt>
+                    <dd class="col-lg-3 col-6">
+                        <h5><span class="badge bg-plomo">{{proceso.porcProt}}%</span></h5>
+                    </dd>
+                    <dt class="col-lg-3 col-6">Fecha PROT</dt>
+                    <dd class="col-lg-3 col-6">
+                        <h5><span class="badge bg-plomo">{{proceso.fechaProt | date:"dd/MM/yyyy"}}</span></h5>
+                    </dd>
+                    <dt class="col-lg-3 col-6">% FINAL</dt>
+                    <dd class="col-lg-3 col-6">
+                        <h5><span class="badge bg-plomo">{{proceso.porcCumplimiento}}%</span></h5>
+                    </dd>
+                    <dt class="col-lg-3 col-6">Fecha Informe</dt>
+                    <dd class="col-lg-3 col-6">
+                        <h5><span class="badge bg-plomo">{{proceso.fechaInforme | date:"dd/MM/yyyy"}}</span></h5>
+                    </dd>
+                </dl>
+                
+
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <div #alertResultado class="alert text-light bg-danger mt-5" role="alert">
+                <h3 class="text-center"> Certificado inexistente</h3>
+            </div>
+        </ng-template>
+    </div>
+</div>

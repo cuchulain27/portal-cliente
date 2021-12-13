@@ -1,0 +1,22 @@
+    .footer {
+        position: absolute;
+        background: #cd0d21;
+        font-size: 14px;
+        min-height: 72px;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    a {
+        text-decoration: none;
+        color: white;
+        border-bottom: 0px solid white;
+    }
+    
+    a:hover {
+        border-width: 1px
+    }
+    
+    .col-sm-6>span {
+        margin: auto;
+    }

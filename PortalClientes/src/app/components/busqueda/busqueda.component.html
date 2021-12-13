@@ -1,0 +1,109 @@
+<div class="row g-3">
+    <div class="col-sm-10 offset-sm-1">
+        <div class="row g-3">
+
+            <div class="col-sm-6">
+                <label for="inputEmail4" class="form-label">RUN Candidato</label>
+                <input #run type="text" (ngModelChange)="run.value=onChangeRun($event)" [(ngModel)]="procesoModel.runCandidato" class="form-control">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputPassword4" class="form-label">Resultado</label>
+                <select type="text" [(ngModel)]="procesoModel.resultado" class="form-select" id="inputPassword4">
+                    <option value="" selected>Seleccione un Resultado</option>
+                    <option value="1">acreditado</option>
+                    <option value="2">no acreditado</option>
+                    <option value="3">no acreditado por brecha crítica</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="inputAddress" class="form-label">Fecha Inicio</label>
+                <input type="date" [(ngModel)]="procesoModel.fechaInicio" class="form-control" id="inputAddress">
+            </div>
+            <div class="col-6">
+                <label for="inputAddress2" class="form-label">Fecha Termino</label>
+                <input type="date" [(ngModel)]="procesoModel.fechaFinal" class="form-control" id="inputAddress2">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputCity" class="form-label">Estado</label>
+                <select type="text" [(ngModel)]="procesoModel.estado" class="form-control" id="inputCity">
+                    <option value="" selected>Seleccione un estado</option>
+                    <option *ngFor="let estado of estadoProceso">{{estado.descripcion}}</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="inputState" class="form-label">Vigencia</label>
+                <select id="inputState" [(ngModel)]="procesoModel.vigencia" class="form-select">
+                    <option value="" selected>Seleccione una Vigencia</option>
+                    <option>vencido</option>
+                    <option>por vencer</option>
+                    <option>vigente</option>
+                </select>
+            </div>
+            <div class="col-sm-6" *ngIf="usuario.zona==null">
+                <label for="inputState" class="form-label">Zona</label>
+                <select id="inputState" [(ngModel)]="procesoModel.zonaFaena" class="form-select">
+                    <option value="" selected>Seleccione una Zona</option>
+                    <option>NORTE</option>
+                    <option>CENTRO</option>
+                    <option>SUR</option>
+                </select>
+            </div>
+            <div class="col-sm-6" *ngIf="usuario.idCliente == '83'">
+                <label for="inputState" class="form-label">Empresa</label>
+                <select id="inputState" class="form-select" [(ngModel)]="procesoModel.idCliente">
+                    <option value="" selected>Seleccione una Empresa</option>
+                    <option value="{{cliente.idCliente}}" *ngFor="let cliente of listClientes">{{cliente.nombreCliente}}</option>
+                   
+                </select>
+            </div>
+            <div class="col-12 ">
+                <button class="btn btn-outline-secondary" (click)="onBtnExport()">Exportar <i
+                        class="fas fa-file-csv"></i></button>
+
+                <button ngbTooltip="Para descargar todos los informes se debe filtrar por estado como firmado " class="btn btn-outline-secondary ml-2" (click)="onbtnDescargarTodo()">Descargar todo <i
+                        class="fas fa-cloud-download-alt"></i></button>
+                <button type="button" (click)="buscarProceso()" class="btn btn-outline-dark float-sm-end">
+                    <i class="fas fa-search"></i>Buscar </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-10 offset-1" *ngIf="resultadoProcesoModel">
+
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Detalle busqueda
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">Total informes</dt>
+                            <dd class="col-sm-1"><span class="badge bg-secondary">{{resumen.total}}</span></dd>
+                            <dt class="col-sm-3">Por vencer</dt>
+                            <dd class="col-sm-1"><span class="badge bg-secondary">{{resumen.porVencer}}</span></dd>
+                            <dt class="col-sm-3">Vencidos</dt>
+                            <dd class="col-sm-1"><span class="badge bg-secondary">{{resumen.vencidos}}</span></dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-sm-3">Acreditados</dt>
+                            <dd class="col-sm-1"><span class="badge bg-secondary">{{resumen.acreditados}}</span></dd>
+                            <dt class="col-sm-3">Reprobados</dt>
+                            <dd class="col-sm-1"><span class="badge bg-secondary">{{resumen.reprobados}}</span></dd>
+                            <dt class="col-sm-3">Sin informe</dt>
+                            <dd class="col-sm-1"><span class="badge bg-secondary">{{resumen.sinInformes}}</span></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-10 offset-1" *ngIf="resultadoProcesoModel" style="height: 600px;">
+
+        <ag-grid-angular class="ag-theme-alpine rounded" [rowData]="rowData" [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [pagination]="true" [localeText]="LOCALE" [frameworkComponents]="frameworkComponents" (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+    </div>
+</div>

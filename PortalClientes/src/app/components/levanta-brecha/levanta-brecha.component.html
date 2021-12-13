@@ -1,0 +1,129 @@
+<div *ngIf="resultado.descResultado">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div #alertResultado class="alert text-light" [ngClass]="{'bg-success': resultado.idResultado==1,'bg-danger':resultado.idResultado != 1}" role="alert">
+                        <h3 class="text-center">{{resultado.descResultado | uppercase}} </h3>
+                        <h3 class="text-center">Certificado {{resultado.vigencia | uppercase}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-12 mb-2">
+                    <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                        <p class="font-weight-bold mb-1">Nombre</p>
+                        <span>{{resultado.nombreCandidato}}</span>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-12 mb-2">
+                    <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                        <p class="font-weight-bold mb-1">Rut</p>
+                        <span>{{resultado.runCandidato | run}}</span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 mb-2">
+                    <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                        <p class="font-weight-bold mb-1">Perfil</p>
+                        <span>{{resultado.perfil}}</span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 mb-2">
+                    <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                        <p class="font-weight-bold mb-1">Equipo</p>
+                        <span>{{resultado.modelo}}</span>
+                    </div>
+                </div>
+                <div class="col-12 mb-2">
+                    <div class="alert alert-light border border-secondary rounded mb-0 p-2">
+                        <p class="font-weight-bold mb-1">Empresa</p>
+                        <span>{{resultado.nombreCliente}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3 mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Subir un archivo</h5>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tratamientoOptions" [(ngModel)]="tratamiento" id="tratamiento1" value="otec">
+                        <label class="form-check-label" for="tratamiento1">OTEC</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tratamientoOptions" [(ngModel)]="tratamiento" id="tratamiento2" value="instructor">
+                        <label class="form-check-label" for="tratamiento2">Instructor Interno</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <input class="form-control" type="file" (change)="onFileSelected($event)" id="formFile">
+                </div>
+                <div class="col-md-6 col-12">
+                    <div *ngIf="tratamiento=='otec' ;else elseInput">
+                        <input class="form-control" list="dtOtec" id="dtOtecIp" placeholder="OTEC" [(ngModel)]="detTratamiento">
+                        <datalist id="dtOtec">
+                            <option *ngFor="let item of otec.data" value="{{item.rut + ' ' +item.nombre}}">
+                        </datalist>
+                    </div>
+                    <ng-template #elseInput>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputOtro" [(ngModel)]="detTratamiento">
+                            <label for="inputOtro">Ingrese Informacion</label>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3 mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Brechas Documentales</h5>
+            <div class="input-group mb-3" *ngFor="let brecha of resBrechas.brechaEi">
+                <div class="input-group-text">
+                    <input class="mt-0" type="checkbox" value="{{brecha.id}}" [(ngModel)]="brecha.checked" [checked]="brecha.checked" [disabled]="brecha.disabled">
+                </div>
+                <span class="form-control" readonly>{{brecha.glsBrecha}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3 mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Brechas de Conocimiento</h5>
+            <div class="input-group mb-3" *ngFor="let brecha of resBrechas.brechaPct">
+                <div class="input-group-text">
+                    <input class="mt-0" type="checkbox" value="{{brecha.id}}" [(ngModel)]="brecha.checked" [checked]="brecha.checked" [disabled]="brecha.disabled">
+                </div>
+                <span class="form-control" readonly>{{brecha.glsBrecha}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3 mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Brechas Prácticas</h5>
+            <div class="input-group mb-3" *ngFor="let brecha of resBrechas.brechaProt">
+                <div class="input-group-text">
+                    <input class="mt-0" type="checkbox" value="{{brecha.id}}" [(ngModel)]="brecha.checked" [checked]="brecha.checked" [disabled]="brecha.disabled">
+                </div>
+                <span class="form-control" readonly>{{brecha.glsBrecha}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3 mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <button type="button" (click)="sellAllBrechas()" class="btn btn-secondary float-left" [ngClass]="{'d-none': habilitaInforme}">Seleccionar Todos</button>
+                </div>
+                <div class="col-md-4 col-12 mx-auto">
+                    <button type="button" (click)="fnGeneraInforme()" class="btn btn-info btn-block" [ngClass]="{'d-none': !habilitaInforme}">Generar Informe</button>
+                </div>
+                <div class="col-md-4 col-12">
+                    <button type="button" (click)="fnGuardar()" class="btn btn-success float-right" [ngClass]="{'d-none': habilitaInforme}">Tratar Brechas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

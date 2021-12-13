@@ -1,0 +1,38 @@
+    /* You can add global styles to this file, and also import other style files */
+    
+    @import "assets/css/bootstrap.min.css";
+    @import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+    @import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+    @import "assets/css/css/all.min.css";
+    /*font awesome */
+    
+    body {
+        font-family: Helvetica, sans-serif;
+        height: 100vh;
+        min-height: 100vh;
+        position: relative;
+        margin: 0;
+    }
+    
+    app-root {
+        min-height: 100%;
+        display: block;
+        position: relative;
+        padding-bottom: 76px;
+    }
+    
+    ag-grid-angular {
+        height: 100%;
+    }
+    
+    .bg-white {
+        background-color: white;
+    }
+    
+    .btn:not(:disabled):active:focus {
+        transform: scale(0.95);
+    }
+    
+    .bg-plomo {
+        background-color: #999!important;
+    }
